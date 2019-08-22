@@ -43,17 +43,21 @@ pipeline {
  				input 'Deploy container to production ?'
                 milestone label:'container ready for production', ordinal:1
                 sh "sshpass -p ${USERPASS} ${USERNAME}@${env.Production_IP} \" docker pull ${dockerhub_repo}\""
- 				try {
+ 				script{
+ 				    node {
+						try {
 
- 				    sh "sudo docker container stop train-schedule"
- 				    sh "sudo docker container rm train-schedule"
- 				    
+ 				    		sh "sudo docker container stop train-schedule"
+ 				    		sh "sudo docker container rm train-schedule"
+ 				   }
+ 					catch (Exception e ){
+ 				         echo 'Cannot remove container see details' + e.toString()  				                     
+ 				  }
+								 				        
+ 				    }
 
  				}
- 				catch (Exception e ){
- 				         echo 'Cannot remove container see details' + e.toString()
- 				          				                     
- 				  }
+
  				  sh "sudo docker container run --restart always -p 8080:8080 -d --name train-schedule"
 
 		
