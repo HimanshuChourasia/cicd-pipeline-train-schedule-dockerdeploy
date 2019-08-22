@@ -42,7 +42,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'production_server', passwordVariable: 'USERPASS', usernameVariable: 'USERNAME')]) {
  				input 'Deploy container to production ?'
                 milestone label:'container ready for production', ordinal:1
-                sh "sshpass -p ${USERPASS} ${USERNAME}@${env.Production_IP} \" docker pull ${dockerhub_repo}\""
+                sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${env.Production_IP} \" docker pull ${dockerhub_repo}\""
  				script{
  				    node {
 						try {
