@@ -47,8 +47,8 @@ pipeline {
  				    node {
 						try {
 
- 				    		sh "sudo docker container stop train-schedule"
- 				    		sh "sudo docker container rm train-schedule"
+ 				    		sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${env.Production_IP} \"sudo docker container stop train-schedule\""
+ 				    		sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${env.Production_IP} \"sudo docker container rm train-schedule\""
  				   }
  					catch (Exception e ){
  				         echo 'Cannot remove container see details' + e.toString()  				                     
