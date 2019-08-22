@@ -20,7 +20,7 @@ pipeline {
            }
            steps{
          	script {
-    			def myImage = docker.build("${dockerhub_repo}:{env.BUILD_ID}")
+    			def myImage = docker.build("${dockerhub_repo}:${env.BUILD_ID}")
     			docker.withRegistry('', dockerhub_credential) {
     			myImage.push()
     			myImage.push('latest')
