@@ -1,6 +1,6 @@
 pipeline {
  environment {
-    dockerhub_repo = 'HimanshuChourasia/train-schedule'
+    dockerhub_repo = 'himanshuchourasia/train-schedule'
     dockerhub_credential = 'dockerhubcreds' 
  }
 
