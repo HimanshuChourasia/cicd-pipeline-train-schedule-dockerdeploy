@@ -55,7 +55,7 @@ pipeline {
  				         echo 'Cannot remove container see details' + e.toString()  				                     
  				  }
 								 				        
- 				  sh "sudo docker container run --restart always -p 8080:8080 -d --name train-schedule"  
+ 				  sh "sudo docker container run --restart always -p 8080:8080 -d --name train-schedule ${dockerhub_repo}:latest"  
 
  				}
 
