@@ -44,7 +44,7 @@ pipeline {
                 milestone label:'container ready for production', ordinal:1
                
  				script{
- 				    node {
+ 				    
 						 sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${env.Production_IP} \" sudo docker pull ${dockerhub_repo}\""
 						try {
 
@@ -55,11 +55,11 @@ pipeline {
  				         echo 'Cannot remove container see details' + e.toString()  				                     
  				  }
 								 				        
- 				    }
+ 				  sh "sudo docker container run --restart always -p 8080:8080 -d --name train-schedule"  
 
  				}
 
- 				  sh "sudo docker container run --restart always -p 8080:8080 -d --name train-schedule"
+ 				  
 
 		
  			          
