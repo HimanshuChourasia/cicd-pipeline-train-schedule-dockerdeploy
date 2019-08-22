@@ -30,6 +30,7 @@ pipeline {
 }     
                
            }
+       }    
            
            stage('deploy container to production'){
              when {
@@ -56,7 +57,7 @@ pipeline {
  				  sh "sudo docker container run --restart always -p 8080:8080 -d --name train-schedule"
 
 		
- 			   }       
+ 			          
             }
          }                        
        }
